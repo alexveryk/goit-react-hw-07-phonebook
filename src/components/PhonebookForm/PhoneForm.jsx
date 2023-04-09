@@ -8,8 +8,7 @@ import {
   ErrorMessageForm,
 } from './PhoneForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addContact } from "redux/contactsSlice";
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContacts } from 'redux/operations';
 
 const PhonebookSchema = Yup.object().shape({
@@ -22,9 +21,8 @@ const PhonebookSchema = Yup.object().shape({
 
 export const PhonebookForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
-  const contacts = useSelector(getContacts);
-  console.log(contacts);
   const addNewContact = newContacts => {
     if (contacts.some(el => el.name === newContacts.name)) {
       alert(`${newContacts.name} is alredy in contacts`);
